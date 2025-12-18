@@ -35,7 +35,12 @@ while (match := input('Match: ')) != '':
         print('bad format')
         continue
 
-    e = expected(ratings[a.upper()], ratings[b.upper()])
+    try:
+        e = expected(ratings[a.upper()], ratings[b.upper()])
+    except KeyError:
+        print('unknown key')
+        continue
+
     if e >= 0.5:
         print(f'{a} {100 * e:.1f}%')
     else:
