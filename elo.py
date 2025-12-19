@@ -1,7 +1,8 @@
+from sys import argv
 import json
 
 # load match data
-with open('matches20242025.json') as f:
+with open(argv[1] if len(argv) > 1 else 'matches20242025.json') as f:
     matches = json.load(f)
 
 # calculate ratings
@@ -27,10 +28,10 @@ for k, v in sorted(ratings.items(), key=lambda r: -r[1]):
     print(f'{k} - {v:.1f}')
 
 # start interactive match prediction
-print('\nex. "Match: eagles commanders"')
+print('\nex. "Match: eagles/commanders"')
 while (match := input('Match: ')) != '':
     try:
-        a, b = match.split(' ', 1)
+        a, b = match.split('/', 1)
     except ValueError:
         print('bad format')
         continue
